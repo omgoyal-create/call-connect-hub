@@ -15,7 +15,8 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
           icon: Phone,
           title: "Calling...",
           subtitle: "Connecting to network",
-          color: "text-primary",
+          bgColor: "bg-pink-100",
+          iconColor: "text-pink-500",
           animation: "pulse",
         };
       case "ringing":
@@ -23,7 +24,8 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
           icon: PhoneCall,
           title: "Ringing",
           subtitle: "Waiting for answer",
-          color: "text-primary",
+          bgColor: "bg-pink-100",
+          iconColor: "text-pink-500",
           animation: "ring",
         };
       case "connected":
@@ -31,7 +33,8 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
           icon: Mic,
           title: "Connected",
           subtitle: "Bot is speaking",
-          color: "text-green-400",
+          bgColor: "bg-emerald-100",
+          iconColor: "text-emerald-500",
           animation: "wave",
         };
       case "ended":
@@ -39,7 +42,8 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
           icon: PhoneOff,
           title: "Call Ended",
           subtitle: "Thank you for using Bot Call",
-          color: "text-red-400",
+          bgColor: "bg-gray-100",
+          iconColor: "text-gray-500",
           animation: "none",
         };
     }
@@ -53,7 +57,7 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="p-8 flex flex-col items-center justify-center min-h-[400px]"
+      className="p-8 flex flex-col items-center justify-center min-h-[400px] bg-white"
     >
       {/* Phone icon with animation */}
       <div className="relative mb-8">
@@ -63,7 +67,7 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
             {[1, 2, 3].map((i) => (
               <motion.div
                 key={i}
-                className="absolute inset-0 rounded-full border-2 border-primary"
+                className="absolute inset-0 rounded-full border-2 border-pink-400"
                 initial={{ scale: 1, opacity: 0.6 }}
                 animate={{ scale: 2.5, opacity: 0 }}
                 transition={{
@@ -83,7 +87,7 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
             {[1, 2, 3, 4, 5].map((i) => (
               <motion.div
                 key={i}
-                className="w-1 bg-green-400 rounded-full"
+                className="w-1 bg-emerald-400 rounded-full"
                 animate={{
                   height: [10, 30 + Math.random() * 20, 10],
                 }}
@@ -100,10 +104,7 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
 
         {/* Main icon container */}
         <motion.div
-          className={`w-24 h-24 rounded-full flex items-center justify-center ${
-            state === "connected" ? "bg-green-500/20" : 
-            state === "ended" ? "bg-red-500/20" : "bg-primary/20"
-          }`}
+          className={`w-24 h-24 rounded-full flex items-center justify-center ${content.bgColor}`}
           animate={
             content.animation === "ring"
               ? { rotate: [-5, 5, -5] }
@@ -117,13 +118,13 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
             ease: "easeInOut",
           }}
         >
-          <IconComponent className={`w-10 h-10 ${content.color}`} />
+          <IconComponent className={`w-10 h-10 ${content.iconColor}`} />
         </motion.div>
       </div>
 
       {/* Status text */}
       <motion.h3
-        className={`text-2xl font-bold mb-2 ${content.color}`}
+        className={`text-2xl font-bold mb-2 ${content.iconColor}`}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
       >
@@ -131,7 +132,7 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
       </motion.h3>
 
       <motion.p
-        className="text-muted-foreground mb-2"
+        className="text-gray-500 mb-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
@@ -140,7 +141,7 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
       </motion.p>
 
       <motion.p
-        className="text-foreground font-mono text-lg"
+        className="text-gray-800 font-mono text-lg"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
@@ -155,8 +156,8 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-sm text-muted-foreground">In progress</span>
+          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-sm text-gray-500">In progress</span>
         </motion.div>
       )}
 
@@ -166,7 +167,7 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
           {Array.from({ length: 12 }).map((_, i) => (
             <motion.div
               key={i}
-              className="w-1.5 bg-gradient-to-t from-primary to-accent rounded-full"
+              className="w-1.5 bg-gradient-to-t from-pink-500 to-orange-400 rounded-full"
               animate={{
                 height: [8, 20 + Math.random() * 25, 8],
               }}
@@ -185,7 +186,7 @@ const CallingAnimation = ({ state, phoneNumber, onEnd }: CallingAnimationProps) 
       {state !== "ended" && (
         <motion.button
           onClick={onEnd}
-          className="mt-8 px-6 py-3 bg-destructive text-destructive-foreground rounded-full font-medium flex items-center gap-2 hover:bg-destructive/90 transition-colors"
+          className="mt-8 px-6 py-3 bg-red-500 text-white rounded-full font-medium flex items-center gap-2 hover:bg-red-600 transition-colors shadow-lg"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0, y: 20 }}

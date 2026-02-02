@@ -15,7 +15,7 @@ const CallButton = ({ onClick }: CallButtonProps) => {
     >
       {/* Outer glow ring */}
       <motion.div
-        className="absolute inset-0 rounded-full bg-primary/30 blur-xl"
+        className="absolute inset-0 rounded-full bg-white/30 blur-xl"
         animate={{
           scale: [1, 1.3, 1],
           opacity: [0.5, 0.8, 0.5],
@@ -31,7 +31,7 @@ const CallButton = ({ onClick }: CallButtonProps) => {
       {[1, 2, 3].map((i) => (
         <motion.div
           key={i}
-          className="absolute inset-0 rounded-full border-2 border-primary/40"
+          className="absolute inset-0 rounded-full border-2 border-white/40"
           initial={{ scale: 1, opacity: 0 }}
           animate={{
             scale: [1, 1.8],
@@ -47,8 +47,8 @@ const CallButton = ({ onClick }: CallButtonProps) => {
       ))}
 
       {/* Main button */}
-      <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center glow-primary group-hover:shadow-[0_0_50px_hsl(var(--glow-primary)/0.6)] transition-shadow duration-300">
-        <Phone className="w-10 h-10 text-primary-foreground" />
+      <div className="relative w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.5)] group-hover:shadow-[0_0_60px_rgba(255,255,255,0.7)] transition-shadow duration-300">
+        <Phone className="w-10 h-10 text-pink-500" />
       </div>
 
       {/* Shimmer effect */}
@@ -57,7 +57,7 @@ const CallButton = ({ onClick }: CallButtonProps) => {
         initial={{ opacity: 0 }}
       >
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
           animate={{
             x: ["-100%", "100%"],
           }}
