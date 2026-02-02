@@ -31,29 +31,29 @@ const AnimatedBackground = () => {
     window.addEventListener("resize", resizeCanvas);
 
     // Initialize particles
-    const particleCount = 80;
+    const particleCount = 60;
     particlesRef.current = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
       size: Math.random() * 2 + 1,
-      opacity: Math.random() * 0.5 + 0.2,
+      opacity: Math.random() * 0.4 + 0.1,
     }));
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw connections
+      // Draw connections with white color
       particlesRef.current.forEach((particle, i) => {
         particlesRef.current.slice(i + 1).forEach((other) => {
           const dx = particle.x - other.x;
           const dy = particle.y - other.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 150) {
+          if (distance < 120) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 230, 255, ${0.1 * (1 - distance / 150)})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 * (1 - distance / 120)})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(other.x, other.y);
@@ -73,7 +73,7 @@ const AnimatedBackground = () => {
         if (particle.y < 0) particle.y = canvas.height;
         if (particle.y > canvas.height) particle.y = 0;
 
-        // Draw particle
+        // Draw particle with white color
         ctx.beginPath();
         const gradient = ctx.createRadialGradient(
           particle.x,
@@ -83,8 +83,8 @@ const AnimatedBackground = () => {
           particle.y,
           particle.size * 2
         );
-        gradient.addColorStop(0, `rgba(0, 230, 255, ${particle.opacity})`);
-        gradient.addColorStop(1, "rgba(0, 230, 255, 0)");
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${particle.opacity})`);
+        gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
         ctx.fillStyle = gradient;
         ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
         ctx.fill();
@@ -105,31 +105,11 @@ const AnimatedBackground = () => {
 
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
-      
-      {/* Radial glow */}
+      {/* Soft white glow orbs */}
       <motion.div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full"
         style={{
-          background: "radial-gradient(circle, hsl(186 100% 50% / 0.1) 0%, transparent 70%)",
-        }}
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.5, 0.8, 0.5],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      
-      {/* Secondary glow */}
-      <motion.div
-        className="absolute top-1/3 left-1/3 w-[600px] h-[600px] rounded-full"
-        style={{
-          background: "radial-gradient(circle, hsl(270 80% 60% / 0.08) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%)",
         }}
         animate={{
           scale: [1, 1.2, 1],
@@ -137,6 +117,22 @@ const AnimatedBackground = () => {
         }}
         transition={{
           duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      
+      <motion.div
+        className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full"
+        style={{
+          background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)",
+        }}
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 6,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 1,

@@ -16,17 +16,20 @@ const Index = () => {
       <div className="relative z-10 flex flex-col items-center text-center px-4">
         {/* Title */}
         <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-4 text-gradient"
+          className="text-5xl md:text-7xl font-bold mb-4 text-white drop-shadow-lg"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          style={{
+            textShadow: "0 4px 30px rgba(0,0,0,0.2)",
+          }}
         >
           Bot Call
         </motion.h1>
 
         {/* Subtitle */}
         <motion.p
-          className="text-lg md:text-xl text-muted-foreground mb-12 max-w-md"
+          className="text-lg md:text-xl text-white/90 mb-12 max-w-md drop-shadow-md"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -50,7 +53,7 @@ const Index = () => {
 
         {/* Call to action text */}
         <motion.p
-          className="mt-8 text-sm text-muted-foreground"
+          className="mt-8 text-sm text-white/80"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -64,9 +67,6 @@ const Index = () => {
         isOpen={isDialogOpen} 
         onClose={() => setIsDialogOpen(false)} 
       />
-
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </div>
   );
 };
